@@ -9,7 +9,6 @@ void PerformCamShake() {
 CVehicle* vehicle = FindPlayerVehicle(-1, true);
 #ifdef REPLACEBLURWITHCAMSHAKE
 InjectHook(0x704E8A, &CamShakeFunction);
-InjectHook(0x704E8A, &CamShakeFunction);
 #else
 	if (vehicle && vehicle->m_nVehicleSubClass != VEHICLE_PLANE && vehicle->m_nVehicleSubClass != VEHICLE_HELI
 		&& vehicle->m_nVehicleSubClass != VEHICLE_BOAT && vehicle->m_nVehicleSubClass != VEHICLE_BMX &&
