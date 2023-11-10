@@ -2,14 +2,13 @@
 #include "MemoryMgr.h"
 #include "CCamera.h"
 #include "CGeneral.h"
-void	HighspeedCamShake(float shake);
 void	CamShakeFunction(float shake);
 #define REPLACEBLURWITHCAMSHAKE // When this is defined, blur gets replaced with camera shake.
 
 void PerformCamShake() {
 CVehicle* vehicle = FindPlayerVehicle(-1, true);
 #ifdef REPLACEBLURWITHCAMSHAKE
-InjectHook(0x704E8A, &HighspeedCamShake);
+InjectHook(0x704E8A, &CamShakeFunction);
 InjectHook(0x704E8A, &CamShakeFunction);
 #else
 	if (vehicle && vehicle->m_nVehicleSubClass != VEHICLE_PLANE && vehicle->m_nVehicleSubClass != VEHICLE_HELI
@@ -22,11 +21,6 @@ InjectHook(0x704E8A, &CamShakeFunction);
 
 	}
 #endif
-}
-
-void HighspeedCamShake(float shake)
-{
-	CGeneral::CamShakeNoPos(&TheCamera, shake * 0.035f);
 }
 
 void CamShakeFunction(float fShake) {
