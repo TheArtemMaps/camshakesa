@@ -1,11 +1,10 @@
 #include "plugin.h"
 #include "MemoryMgr.h"
 #include "CCamera.h"
+#include "CGeneral.h"
 void	HighspeedCamShake(float shake);
 void	CamShakeFunction(float shake);
-//#define REPLACEBLURWITHCAMSHAKE // When this is defined, blur gets replaced with camera shake.
-
-WRAPPER void CamShakeNoPos(CCamera* pCamera, float fStrength) { WRAPARG(pCamera); WRAPARG(fStrength); EAXJMP(0x50A970); }
+#define REPLACEBLURWITHCAMSHAKE // When this is defined, blur gets replaced with camera shake.
 
 void PerformCamShake() {
 CVehicle* vehicle = FindPlayerVehicle(-1, true);
@@ -19,7 +18,7 @@ InjectHook(0x704E8A, &CamShakeFunction);
 		float speed = vehicle->m_vecMoveSpeed.Magnitude();
 
 		if (speed > 0.75f)
-			CamShakeNoPos(&TheCamera, FindPlayerVehicle(-1, 0)->m_vecMoveSpeed.Magnitude() * 0.040f);
+			CGeneral::CamShakeNoPos(&TheCamera, FindPlayerVehicle(-1, 0)->m_vecMoveSpeed.Magnitude() * 0.040f);
 
 	}
 #endif
@@ -27,11 +26,11 @@ InjectHook(0x704E8A, &CamShakeFunction);
 
 void HighspeedCamShake(float shake)
 {
-	CamShakeNoPos(&TheCamera, shake * 0.030f);
+	CGeneral::CamShakeNoPos(&TheCamera, shake * 0.035f);
 }
 
 void CamShakeFunction(float fShake) {
-	CamShakeNoPos(&TheCamera, fShake * 0.030f);
+	CGeneral::CamShakeNoPos(&TheCamera, fShake * 0.035f);
 }
 
 class CameraShake {
