@@ -1,3 +1,4 @@
+
 workspace "camerashakeathighspeed-sa"
 	configurations { "Release", "Debug" }
 	location "project_files"
@@ -57,3 +58,4 @@ project "camerashakeathighspeed-sa"
 		debugdir "$(GTA_SA_DIR)"
 		debugcommand "$(GTA_SA_DIR)/gta-sa.exe"
 		postbuildcommands "copy /y \"$(TargetPath)\" \"$(GTA_SA_DIR)\\scripts\\CamShake-sa.asi\""
+
